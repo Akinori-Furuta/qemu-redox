@@ -47,8 +47,14 @@ then
 		then
 			if [[ ( "${RedoxIso}" == *.zst ) && ( -f "${redox_find}" ) ]]
 			then
-				echo "${redox_find}: Decompress zst image file."
-				unzstd "${redox_find}"
+				if [[ -L "${redox_find}" ]]
+				then
+					echo "${redox_find}: Decompress symbolic linked zst image file."
+					unzstd -f "${redox_find}"
+				else
+					echo "${redox_find}: Decompress zst image file."
+					unzstd "${redox_find}"
+				fi
 			fi
 		fi
 		RedoxIso="${redox_iso}"
