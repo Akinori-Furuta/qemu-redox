@@ -23,7 +23,7 @@ fi
 #  take first line |
 #  extract 3rd field
 function FindRedoxIso() {
-	push "${my_dir}" > /dev/null
+	pushd "${my_dir}" > /dev/null
 
 	ls redox_*.iso redox_*.iso.zst | \
 	sed 's/\(^.*$\)/\1 \1/' | \
