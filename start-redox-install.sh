@@ -8,10 +8,10 @@ my_base="$(basename "${my_dir}")"
 source "${my_dir}/start-redox.conf"
 source "${my_dir}/start-redox-common.sh"
 
-if [[ ! -e "${RedoxHdd}" ]]
+if [[ ! -e "${RedoxStorage}" ]]
 then
-	"${RedoxHdd}: Create virtual hard disk. size=${RedoxHddSize}"
-	qemu-img create -f "${RedoxHddFormat}" "${RedoxHdd}" "${RedoxHddSize}"
+	echo "${RedoxStorage}: Create virtual storage. size=${RedoxStorageSize}"
+	qemu-img create -f "${RedoxStorageFormat}" "${RedoxStorage}" "${RedoxStorageSize}"
 fi
 
 # arg: none
@@ -70,6 +70,7 @@ SDL_VIDEO_X11_DGAMOUSE=0 qemu-system-x86_64 -d cpu_reset,guest_errors -smp ${Red
 	-chardev stdio,id=debug,signal=off,mux=on,"" -serial chardev:debug -mon chardev=debug \
 	-machine q35 -device ich9-intel-hda -device hda-duplex -netdev user,id=net0 \
 	-device e1000,netdev=net0 -device nec-usb-xhci,id=xhci -enable-kvm -cpu host \
-	-drive "file=${RedoxHdd},format=${RedoxHddFormat},index=0,media=disk" \
-	-drive "file=${RedoxIso},index=1,media=cdrom" \
+	-drive "file=${RedoxStorage},format=${RedoxStorageFormat},media=disk,if=ide,index=0" \
+	-drive "file=${RedoxIso},format=raw,media=cdrom,if=ide,index=1" \
+	-boot dc \
 	"$@"
