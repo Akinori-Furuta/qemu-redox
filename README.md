@@ -31,6 +31,8 @@ Disk.
       * May fail writing, can't install Redox OS to
         virtual USB memory
 
+![Redox OS desktop on QEMU emulator](README-media/desktop-0-cut.png)
+
 ## Required packages
 
 On Ubuntu or delivered distributions,
@@ -155,7 +157,7 @@ installer_tui: redoxfs password (empty for none):
 > [!TIP]
 > You can configure size of drive (storage) capacity to
 > install Redox OS. Edit `RedoxStorageSize="7530M"` parameter
-> in `start-redox.conf` file.
+> in [start-redox.conf](./start-redox.conf) file.
 > If there is `redox-storage.qcow2` file, rename it.
 > (for example:
 > `mv redox-storage.qcow2 redox-storage-$(date +%s).qcow2`).
@@ -218,15 +220,17 @@ following issues,
 May real machine couldn't boot Redox OS, useless.
 
 * Very slow boot
-  * On some PCs, read image from USB memory or CDROM
-    drive at 1 to 3 Mbytes/sec or less speed.
+  * On some PCs, read image from USB memory
+    or Optical disc media drive drive
+    at 1 to 3 Mbytes/sec or less speed.
     So, 5 or more minutes to complete boot.
     And you may see hang up or some error during
     long boot process.
 * Need PS/2 keyboard and PS/2 mouse
-  * We can find them on very old PC, but old PC can't boot
-    Redox OS some other reasons (memory, CPU, or supported
-    booting devices).
+  * We can find them on very old PC,
+    but old PC can't boot Redox OS some other
+    reasons (memory, CPU, or supported booting
+    devices).
   * I can't found USB HID devices work with Redox OS.
 * IDE/SATA controller and drive don't work well
   * I guess there is control timing issue.
