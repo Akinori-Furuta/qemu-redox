@@ -25,7 +25,7 @@ fi
 function FindRedoxIso() {
 	pushd "${my_dir}" > /dev/null
 
-	ls redox_*.iso redox_*.iso.zst | \
+	ls redox_*.iso redox_*.iso.zst  2>/dev/null | \
 	sed 's/\(^.*$\)/\1 \1/' | \
 	sed 's/^[[:alpha:]]*_[[:alpha:]]*_.*_\([0-9]\+-[0-9]\+-[0-9]\+\)_\([0-9]\+\).*[[:space:]]\+\(.*\)/\1 \2 \3/' | \
 	sort -s -k 1,1r --key=2,2nr | \
